@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 
-version = __import__('options').get_version()
+version = __import__('user_action_confirmation').get_version()
 
 
 def get_requires_list(filename):
