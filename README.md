@@ -1,2 +1,0 @@
-django-user-action-confirmation
-===============================
