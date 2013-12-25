@@ -22,9 +22,10 @@ class ConfirmActionView(TemplateView):
     }
     check_expiration = True
     redirect_field_name = 'next'
+    token_field_name = 'token'
 
     def get(self, request, *args, **kwargs):
-        key = self.kwargs.get('token', '').strip()
+        key = self.kwargs.get(self.token_field_name, '').strip()
         self.error_message = False
         if key not in EMPTY_VALUES:
             try:
