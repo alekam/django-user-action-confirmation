@@ -1,5 +1,5 @@
 # major, minor, patch
-VERSION = (0, 1, 0)
+VERSION = (0, 1, 1)
 
 
 def get_version():
@@ -11,4 +11,4 @@ def get_version():
 
 def create_ticket(action, user=None):
     from user_action_confirmation.models import Confirmation
-    return Confirmation.objects.create(user=user, action=action).ticket
+    return Confirmation.objects.create(user=user, action=action).token

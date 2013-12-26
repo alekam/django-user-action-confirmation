@@ -25,9 +25,10 @@ class ConfirmActionView(TemplateView):
     token_field_name = 'token'
 
     def get(self, request, *args, **kwargs):
-        key = self.kwargs.get(self.token_field_name, '').strip()
+        self.request = request
         self.error_message = False
-        if key not in EMPTY_VALUES:
+        key = self.get_token()
+        if key is not None:
             try:
                 token = Confirmation.objects.get(token=key,
                                              action=self.operation)
@@ -59,5 +60,19 @@ class ConfirmActionView(TemplateView):
             redirect_to = resolve_url(self.success_url)
         return redirect_to
 
+    def get_token(self):
+        """
+        Returns actual key or None
+        """
+        key = self.kwargs.get(self.token_field_name, '').strip()
+        if key in EMPTY_VALUES:
+            key = self.request.GET.get(self.token_field_name, '').strip()
+            if key in EMPTY_VALUES:
+                key = self.request.POST.get(self.token_field_name, '').strip()
+                if key in EMPTY_VALUES:
+                    key = None
+        return key
+
     def token_valid(self, token):
+        token.confirm()
         return HttpResponseRedirect(self.get_success_url())

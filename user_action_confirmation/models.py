@@ -13,7 +13,7 @@ __all__ = ['Confirmation', ]
 
 def create_token(email):
     salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
-    return hashlib.sha1(salt + email).hexdigest()
+    return hashlib.sha1(salt + email.encode('utf8')).hexdigest()
 
 
 class ConfirmationManager(models.Manager):
