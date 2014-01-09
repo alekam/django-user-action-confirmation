@@ -1,4 +1,4 @@
-from user_action_confirmation.models import *
+from .models import Confirmation
 from django.contrib import admin
 
 
