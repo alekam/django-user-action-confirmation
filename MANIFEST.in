@@ -1,4 +1,4 @@
 include *.py
 exclude *.pyc
-recursive-include options *
-
+recursive-include user_action_confirmation *
+include requirements.txt
