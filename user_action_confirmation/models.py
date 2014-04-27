@@ -1,6 +1,5 @@
 # coding: utf-8
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from django.db import models
 from jsonfield import JSONField
 import datetime
@@ -28,7 +27,7 @@ class ConfirmationManager(models.Manager):
 
 
 class Confirmation(models.Model):
-    user = models.ForeignKey(get_user_model(), verbose_name=u'пользователь',
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=u'пользователь',
                              blank=True, null=True)
     created = models.DateTimeField(u'запрошено', auto_now_add=True)
     token = models.CharField(max_length=40, blank=True)
